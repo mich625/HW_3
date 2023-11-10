@@ -1,29 +1,8 @@
-##inputs -> Y = B0 + B1 + ..... + Bn, data = data set
-##
-##
-##
-##_____________________________________________________-
-##Outputs
+##pushing to git
+##git remote add origin git@github.com:mich625/HW_3.git   ##this probably not needed if connection already set
+##git branch -M main
+##git push -u origin main
 
-#coefficients
-#residuals
-#effects
-#rank
-#fitted.values
-#assign
-#qr
-#df.residual
-#xlevels
-#call
-#terms
-#model
-
-##______________________________________________________
-##what it neads to do
-##sum of squares minimization, should be in 650 notes
-##
-##
-##
 ##_____________________________________________
 ##original function
 
@@ -38,17 +17,21 @@ summary(orig_lm)
 all.equal(mk_lm(formula = mpg ~ cyl + wt, data = mtcars), lm(formula = mpg ~ cyl + wt, data = mtcars))
 bench::mark(mk_lm(formula = mpg ~ cyl + wt, data = mtcars), lm(formula = mpg ~ cyl + wt, data = mtcars))
 
+mk_lm(Y = Y,X1 = X1,X2 = X2,data = data)
 
 ##________________________________________________
 ##inputs
+data()
+data("mtcars")
 data = mtcars
 X1 = data$wt
 X2 = data$cyl
 Y = data$mpg
-
+formula = Y ~ X1 + X2
 #_________________________________________________
 
-mk_lm = function(formula, data){
+#mk_lm = function(formula, data){
+mk_lm = function(Y,X1,X2,data){
 
 ##create X matrix
 intercept = rep(1, nrow(data))
@@ -84,12 +67,16 @@ t_stats = beta/SE
 p_value = 2*(1 - pt(abs(t_stats), df)) #2 sided
 
 
+##Output creation__________________________
 ##Organizing the Outputs to match lm()
-regression_summary = list(beta,residuals)
-names(regression_summary) = c("beta", "residuals")
+regression_summary = list(beta,SE)
+#names(regression_summary) = c("estimates")
 
-print(regression_summary)
+#print(regression_summary)
 
 
   return(regression_summary)
 }
+
+##_____________Test Case____________________
+mk_lm(Y = Y,X1 = X1,X2 = X2,data = data)
