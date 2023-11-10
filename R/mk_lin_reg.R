@@ -1,43 +1,35 @@
-##pushing to git
-##git remote add origin git@github.com:mich625/HW_3.git   ##this probably not needed if connection already set
-##git branch -M main
-##git push -u origin main
+#'MK_Regression
+#'
+#'This function uses ordinary least squares to do linear regression.  It requires an input of Y (outcome) and
+#'X (matrix of covariates).  It will then run a linear regression and poutput the beta coefficiants, standard error,
+#'t statistic, and p value (using a 2 sided test with alpha = 0.05 significance).
+#'
+#'
+#'@param Y outcome variable must be in vector format
+#'@param X covariate matrix, each column is a different covariate. Note, if an individual covariate need to be a matrix still.
+#'@param X_names the names of the covariates in the model
+#'
+#'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value
+#'
+#'@examples
+#'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
+#'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+#'
+#'@export
+#'
 
-##_____________________________________________
-##original function
 
-mtcars = data(mtcars)
-orig_lm = lm(formula = mpg ~ cyl + wt, data = mtcars)
-orig_lm
-summary(orig_lm)
+mk_lm = function(Y,X, X_names){
 
-##________________________________________________
-##testing
+##warning for if they put in unequal length arguments
+if (length(Y) != nrow(X)){print("warning - inputs not of equal length")}
 
-all.equal(mk_lm(formula = mpg ~ cyl + wt, data = mtcars), lm(formula = mpg ~ cyl + wt, data = mtcars))
-bench::mark(mk_lm(formula = mpg ~ cyl + wt, data = mtcars), lm(formula = mpg ~ cyl + wt, data = mtcars))
+##Add intercept to X matrix
+colnames(X) = X_names
+intercept = rep(1, nrow(X))
+X_mat = cbind(intercept, X)
 
-mk_lm(Y = Y,X1 = X1,X2 = X2,data = data)
-
-##________________________________________________
-##inputs
-data()
-data("mtcars")
-data = mtcars
-X1 = data$wt
-X2 = data$cyl
-Y = data$mpg
-formula = Y ~ X1 + X2
-#_________________________________________________
-
-#mk_lm = function(formula, data){
-mk_lm = function(Y,X1,X2,data){
-
-##create X matrix
-intercept = rep(1, nrow(data))
-X_mat = cbind(intercept, X1, X2)
-
-##formulat for coefficients, (tX X)' tX Y
+##formula for coefficients -> (tX X)' tX Y
 beta = solve(t(X_mat) %*% X_mat) %*% t(X_mat) %*% Y  #note this is beta hat
 
 ##residuals -> Y - Y_hat -> Y - X*B
@@ -56,27 +48,14 @@ var_cov_mat = res_var * solve(t(X_mat) %*% X_mat)
 SE = sqrt(diag(var_cov_mat))
 res_std_error = sqrt(SSE/df)
 
-##rank -> the number of covars + 1
-rank = ncol(X_mat)
-
-##fitted values -> just run the betas through
-Y_fitted = beta[1] + X1*beta[2] + X2*beta[3]
-
 ##t_value and p_value
 t_stats = beta/SE
 p_value = 2*(1 - pt(abs(t_stats), df)) #2 sided
 
-
-##Output creation__________________________
-##Organizing the Outputs to match lm()
-regression_summary = list(beta,SE)
-#names(regression_summary) = c("estimates")
-
-#print(regression_summary)
-
+##Output creation
+regression_summary = cbind(beta, SE, t_stats, p_value)
+colnames(regression_summary) = c("estimate", "std error", "t stat", "p value")
 
   return(regression_summary)
 }
 
-##_____________Test Case____________________
-mk_lm(Y = Y,X1 = X1,X2 = X2,data = data)
