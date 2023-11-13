@@ -58,4 +58,3 @@ colnames(regression_summary) = c("estimate", "std error", "t stat", "p value")
 
   return(regression_summary)
 }
-
