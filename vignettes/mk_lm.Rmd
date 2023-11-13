@@ -1,0 +1,51 @@
+---
+title: "mk_lm"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mk_lm}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(hw3mklinreg)
+```
+
+###____________above is what was creaded by usethis, may need to edit____________________________
+
+To use the function mk_lm an output Y must be included
+
+```{r}
+mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
+```
+
+
+
+
+This function can also do simple linear regression
+
+```{r}
+mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+```
+
+
+
+To show an example from another r base dataset
+```{r}
+
+```
+
+
+
+This function creates an identical output to the well established lm() function as shown below to
+5 decimal spaces.
+
+
+
