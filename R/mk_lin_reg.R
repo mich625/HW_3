@@ -24,7 +24,15 @@ mk_lm = function(Y,X, X_names){
 ##warning for if they put in unequal length arguments
 if (length(Y) != nrow(X)){print("warning - inputs not of equal length")}
 
+##na values ruin this data so we need to remove them
+clean_data = cbind(Y,X)
+clean_data = na.omit(clean_data)
+Y = clean_data[,1]
+X = clean_data[,2:ncol(clean_data)]
+
+
 ##Add intercept to X matrix
+X = matrix(X, nrow = length(Y))
 colnames(X) = X_names
 intercept = rep(1, nrow(X))
 X_mat = cbind(intercept, X)

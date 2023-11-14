@@ -5,9 +5,9 @@ vignette: >
   %\VignetteIndexEntry{mk_lm}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
+--- 
 
-```{r, include = FALSE}
+```{r, include = FALSE} 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -18,9 +18,8 @@ knitr::opts_chunk$set(
 library(hw3mklinreg)
 ```
 
-###____________above is what was creaded by usethis, may need to edit____________________________
 
-To use the function mk_lm an output Y must be included
+To use the function mk_lm an outcome Y and matrix of covariates X along with a vector X_names must be included like below.
 
 ```{r}
 mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
@@ -29,7 +28,7 @@ mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "c
 
 
 
-This function can also do simple linear regression
+This function can also do simple linear regression.  It is reccomented to use an nx1 matrix still for the X covariate
 
 ```{r}
 mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
@@ -37,15 +36,34 @@ mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
 
 
 
-To show an example from another r base dataset
+To show an example from another r base dataset see below.  This dataset contains NA values.  The mk_lm function
+removes all rows that contain NA's as a simplistic way to adress this potential error.
 ```{r}
-
+mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R, airquality$Month), X_names = c("Solar Radiation", "Month"))
 ```
+Single linear regression example for 2nd dataset
 
+```{r}
+mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation"))
+```
 
 
 This function creates an identical output to the well established lm() function as shown below to
 5 decimal spaces.
+```{r}
+all.equal(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],
+          round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12])
+```
+Another example in the 2nd data set of the exact match to lm() proving the functions success
+```{r}
+all.equal(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
+          round((summary(lm(formula = Ozone ~ Solar.R, data = airquality)))$coefficients,5)[1:8])
+```
 
+Benchmarking: When testing efficiency, the mk_lm is substancially faster than lm.  This is expected with proper development due to the fact that the lm function has some additional processes then the mk_lm function does not do.
+
+```{r}
+bench::mark(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12], iterations = 1000 )
+```
 
 
