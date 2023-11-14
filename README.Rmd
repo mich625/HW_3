@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 # hw3mklinreg  
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/mich625/HW_4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mich625/HW_4/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/mich625/HW_4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mich625/HW_4?branch=main)
 <!-- badges: end -->
 
 # Description
