@@ -14,56 +14,64 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+The function mk_lm within the package hw3mklinreg runs a linear regression using the ordinary least squares method to calculate
+the beta estimate, standard error, t statistic, and p value for the regression.  An outcome varible Y must be specified along
+with a matrix X which containes the covariates.  Additionally, the names of the covariates must be put in a vector of strings
+names X_names to generate the output.
+
 ```{r setup}
 library(hw3mklinreg)
 ```
 
-
-To use the function mk_lm an outcome Y and matrix of covariates X along with a vector X_names must be included like below.
+# Multiple Linear Regression
+The below shows the function running multiple linear regression from the r base mtcars package.
 
 ```{r}
 mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
 ```
-
-
-
-
-This function can also do simple linear regression.  It is reccomented to use an nx1 matrix still for the X covariate.
-
-```{r}
-mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
-```
-
-
 
 To show an example from another r base dataset see below.  This dataset contains NA values.  The mk_lm function
 removes all rows that contain NA's as a simplistic way to adress this potential error.
 ```{r}
 mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R, airquality$Month), X_names = c("Solar Radiation", "Month"))
 ```
-Single linear regression example for 2nd dataset
+
+
+# Simple Linear Regression
+This function can also do simple linear regression.  It is recommended to use an nx1 matrix still for the X covariate.
+
+```{r}
+mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
+```
+
+Simple linear regression example for 2nd dataset which contains NA values is below.  
 
 ```{r}
 mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation"))
 ```
 
-
+# Comparrison to established regression function lm()
 This function creates an identical output to the well established lm() function as shown below to
-5 decimal spaces.
+5 decimal spaces (multiple linear regression)
 ```{r}
 all.equal(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],
           round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12])
 ```
-Another example in the 2nd data set of the exact match to lm() proving the functions success
+Another example in the 2nd data set of the exact match to lm() proving the functions success (simple linear regression)
 ```{r}
 all.equal(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
           round((summary(lm(formula = Ozone ~ Solar.R, data = airquality)))$coefficients,5)[1:8])
 ```
-
-Benchmarking: When testing efficiency, the mk_lm is substancially faster than lm.  This is expected with proper development due to the fact that the lm function has some additional processes then the mk_lm function does not do.
+# Benchmarking
+When testing efficiency, the mk_lm is substantially faster than lm.  This is expected with proper development due to the fact that the lm function has some additional processes then the mk_lm function does not do.
 
 ```{r}
 bench::mark(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12], iterations = 1000 )
 ```
+Benchmarking for simple linear regression is shown here too
 
-
+```{r}
+bench::mark(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
+          round((summary(lm(formula = Ozone ~ Solar.R, data = airquality)))$coefficients,5)[1:8], iterations = 1000)
+```

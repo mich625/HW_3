@@ -6,6 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
+# Description
+
 The goal of hw3mklinreg is to run a linear regression comparrable to
 what is found with the lm() function.
 

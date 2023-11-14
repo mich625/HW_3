@@ -9,9 +9,9 @@ mk_lm(Y, X, X_names)
 \arguments{
 \item{Y}{outcome variable must be in vector format}
 
-\item{X}{covariate matrix, each column is a different covariate. Note, if an individual covariate need to be a matrix still.}
+\item{X}{covariate matrix, each column is a different covariate. Note, if only one covariate used it is reccomended to still be a matrix.}
 
-\item{X_names}{the names of the covariates in the model}
+\item{X_names}{the names of the covariates in the model as a vector of string(s)}
 }
 \value{
 a table is returned that specifies the beta estimate, standard error, t statistic, and p value
