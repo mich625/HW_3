@@ -6,8 +6,8 @@
 #'
 #'
 #'@param Y outcome variable must be in vector format
-#'@param X covariate matrix, each column is a different covariate. Note, if an individual covariate need to be a matrix still.
-#'@param X_names the names of the covariates in the model
+#'@param X covariate matrix, each column is a different covariate. Note, if only one covariate used it is reccomended to still be a matrix.
+#'@param X_names the names of the covariates in the model as a vector of string(s)
 #'
 #'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value
 #'

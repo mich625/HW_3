@@ -28,7 +28,7 @@ mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "c
 
 
 
-This function can also do simple linear regression.  It is reccomented to use an nx1 matrix still for the X covariate
+This function can also do simple linear regression.  It is reccomented to use an nx1 matrix still for the X covariate.
 
 ```{r}
 mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
