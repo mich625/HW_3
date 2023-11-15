@@ -12,8 +12,8 @@ coverage](https://codecov.io/gh/mich625/HW_4/branch/main/graph/badge.svg)](https
 
 # Description
 
-The goal of hw3mklinreg is to run a linear regression comparrable to
-what is found with the lm() function.
+The goal of the package hw3mklinreg is to run a linear regression
+comparrable to what is found with the lm() function.
 
 ## Installation
 
