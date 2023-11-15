@@ -53,7 +53,7 @@ mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Ra
 
 # Comparrison to established regression function lm()
 This function creates an identical output to the well established lm() function as shown below to
-5 decimal spaces (multiple linear regression)
+5 decimal spaces (multiple linear regression) 
 ```{r}
 all.equal(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],
           round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12])
