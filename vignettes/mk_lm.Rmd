@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 The function mk_lm within the package hw3mklinreg runs a linear regression using the ordinary least squares method to calculate
 the beta estimate, standard error, t statistic, and p value for the regression.  An outcome varible Y must be specified along
 with a matrix X which containes the covariates.  Additionally, the names of the covariates must be put in a vector of strings
-names X_names to generate the output.
+names X_names to generate the output. 
 
 ```{r setup}
 library(hw3mklinreg)
