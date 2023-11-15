@@ -21,5 +21,5 @@ test_that("mk_lm", {
 
 
 ##to test run devtools::test() in the console
-##at the end run the test for coverage (want 100%) -> usethis::use_coverage()
+##at the end run the test for coverage (want 100%) -> usethis::use_coverage() & usethis::use_github_action ("test coverage")
 ##for continuous integration use usethis::use_github_actions() then copy badge and add it to the readME

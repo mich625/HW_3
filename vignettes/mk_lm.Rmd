@@ -24,7 +24,7 @@ names X_names to generate the output.
 library(hw3mklinreg)
 ```
 
-# Multiple Linear Regression
+# Multiple Linear Regression 
 The below shows the function running multiple linear regression from the r base mtcars package.
 
 ```{r}
