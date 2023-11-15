@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 # Description  
-The goal of hw3mklinreg is to run a linear regression comparrable to what is found with the lm() function.
+The goal of the package hw3mklinreg is to run a linear regression comparrable to what is found with the lm() function.
 
 ## Installation
 
@@ -34,7 +34,7 @@ devtools::install_github("mich625/HW_3")
 
 ## Example
 
-This is a basic example which shows you how to run a regression using this package with the r base mtcars dataset. It will use mpg as the outcome based on the covariates for cylinders and weight:
+This is a basic example which shows you how to run a regression using this package with the r base mtcars data set. It will use mpg as the outcome based on the covariates for cylinders and weight:
 
 ```{r example}
 library(hw3mklinreg)

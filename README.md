@@ -28,7 +28,7 @@ devtools::install_github("mich625/HW_3")
 ## Example
 
 This is a basic example which shows you how to run a regression using
-this package with the r base mtcars dataset. It will use mpg as the
+this package with the r base mtcars data set. It will use mpg as the
 outcome based on the covariates for cylinders and weight:
 
 ``` r
