@@ -45,7 +45,7 @@ residuals = Y - X_mat %*% beta
 
 ##degrees of freedom -> number of observations less number of covariates & the rest are in the df res
 df = length(Y) - ncol(X_mat)
-df_res = length(Y) - df
+df_res = length(Y) - df  ##
 
 ##create the variance covariance matrix
 SSE = sum(residuals^2)
@@ -54,7 +54,7 @@ var_cov_mat = res_var * solve(t(X_mat) %*% X_mat)
 
 ##standard errors -> the sqrt of the diagonal of the var_cov matrix
 SE = sqrt(diag(var_cov_mat))
-res_std_error = sqrt(SSE/df)
+res_std_error = sqrt(SSE/df)  #
 
 ##t_value and p_value
 t_stats = beta/SE

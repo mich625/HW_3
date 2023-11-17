@@ -4,10 +4,6 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-- name: Upload coverage reports to Codecov
-  uses: codecov/codecov-action@v3
-  env:
-    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -26,7 +22,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 # Description  
-The goal of the package hw3mklinreg is to run a linear regression comparrable to what is found with the lm() function.
+The goal of the package hw3mklinreg is to run a linear regression comparrable to what is found with the lm() function.  mk_lm can run for simple and multiple linear regression.
 
 ## Installation
 

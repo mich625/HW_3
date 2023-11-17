@@ -1,10 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-- name: Upload coverage reports to Codecov uses:
-  <codecov/codecov-action@v3> env: CODECOV_TOKEN: \${{
-  secrets.CODECOV_TOKEN }}
-
 # hw3mklinreg
 
 <!-- badges: start -->
@@ -17,7 +13,8 @@ coverage](https://codecov.io/gh/mich625/HW_4/branch/main/graph/badge.svg)](https
 # Description
 
 The goal of the package hw3mklinreg is to run a linear regression
-comparrable to what is found with the lm() function.
+comparrable to what is found with the lm() function. mk_lm can run for
+simple and multiple linear regression.
 
 ## Installation
 
