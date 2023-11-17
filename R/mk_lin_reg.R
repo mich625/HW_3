@@ -12,6 +12,7 @@
 #'@return a table is returned that specifies the beta estimate, standard error, t statistic, and p value
 #'
 #'@examples
+#'data(mtcars)
 #'mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
 #'mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight"))
 #'
