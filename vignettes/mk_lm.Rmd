@@ -25,7 +25,7 @@ library(hw3mklinreg)
 ```
 
 # Multiple Linear Regression 
-The below shows the function running multiple linear regression from the r base mtcars package.
+The example below shows the function running multiple linear regression from the r base mtcars package.
 
 ```{r}
 mk_lm(Y = mtcars$mpg, X = cbind(mtcars$wt, mtcars$cyl), X_names = c("weight", "cylinders"))
@@ -53,12 +53,12 @@ mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Ra
 
 # Comparrison to established regression function lm()
 This function creates an identical output to the well established lm() function as shown below to
-5 decimal spaces (multiple linear regression) 
+5 decimal spaces (multiple linear regression).
 ```{r}
 all.equal(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],
           round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12])
 ```
-Another example in the 2nd data set of the exact match to lm() proving the functions success (simple linear regression)
+Another example in the 2nd data set of the exact match to lm() proving the functions success (simple linear regression).
 ```{r}
 all.equal(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
           round((summary(lm(formula = Ozone ~ Solar.R, data = airquality)))$coefficients,5)[1:8])
@@ -69,7 +69,7 @@ When testing efficiency, the mk_lm is substantially faster than lm.  This is exp
 ```{r}
 bench::mark(round(mk_lm(Y = mtcars$mpg, X = matrix(mtcars$wt, ncol = 1), X_names = c("weight")),5)[1:12],round((summary(lm(formula = mpg ~ wt, data = mtcars)))$coefficients,5)[1:12], iterations = 1000 )
 ```
-Benchmarking for simple linear regression is shown here too
+Benchmarking for simple linear regression is shown here too.
 
 ```{r}
 bench::mark(round(mk_lm(Y = airquality$Ozone, X = cbind(airquality$Solar.R), X_names = c("Solar Radiation")),5)[1:8],
